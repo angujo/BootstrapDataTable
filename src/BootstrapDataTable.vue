@@ -1,6 +1,6 @@
 <template>
     <div :id="tableReference" class="border-0 bootstrap-data-table">
-        <table-top :page-sizes="pageSizes" @countChanged="newPageSize" @searched="realSearch"/>
+        <table-top :general-search="GeneralSearch" :page-sizes="pageSizes" @countChanged="newPageSize" @searched="realSearch"/>
         <div class="table-responsive">
             <table class="table">
                 <table-head :table-ref="tableReference" :columns="cleanColumns" @searched="prepareSearch" v-if="columns.length>0"/>
@@ -9,24 +9,24 @@
         </div>
         <pagination :total="totalData" :per-page="perPage" :page="activePage" @paged="newPage"/>
         <div class="d-flex justify-content-center align-items-center overlay" v-if="loading">
-            <i class="bx bx-cog bx-spin"/>
+            <i class="fa fa-cog fa-spin"/>
         </div>
     </div>
 </template>
 
 <script>
+    import _ from 'lodash';
     import Pagination from "./datatable/Pagination";
     import TableBody from "./datatable/TableBody";
     import TableHead from "./datatable/TableHead";
     import TableTop from "./datatable/TableTop";
     import {tableFunctions} from "./datatable/bootstrapTableStore";
-    import _ from 'lodash';
     import axios from 'axios';
-
 
     export default {
         name: "DataTable",
         props: {
+            GeneralSearch: {type: Boolean, default: true},
             columns: {
                 type: Array, default() {
                     return [];

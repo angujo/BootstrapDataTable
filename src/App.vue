@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <bootstrap-data-table v-bind="table"/>
+        <bootstrap-data-table :general-search="true" v-bind="table"/>
     </div>
 </template>
 

@@ -6,8 +6,10 @@
 </template>
 
 <script>
+    import _ from 'lodash';
     import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
     import {tableFunctions} from "./bootstrapTableStore";
+    import BootTableEvent from './BootTableEvent';
 
     export default {
         name: "HeadCheckbox",
@@ -26,7 +28,8 @@
             selValue: {
                 get() {
                     return _.difference(tableFunctions.checkBoxValues[this.tableRef], tableFunctions.rowSelections[this.tableRef]) > 0;
-                }, set(v) {
+                },
+                set(v) {
                     if (v) {
                         tableFunctions.rowSelections[this.tableRef] = Array.from((new Set(_.concat(tableFunctions.rowSelections[this.tableRef], tableFunctions.checkBoxValues[this.tableRef]))));
                     } else {
@@ -34,6 +37,7 @@
                             return !tableFunctions.checkBoxValues[this.tableRef].includes(v);
                         })
                     }
+                    BootTableEvent.$emit(this.tableRef + 'data-check', v);
                     console.log(tableFunctions.rowSelections);
                 }
             }

@@ -1,13 +1,15 @@
 <template>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" :id="id" :value="variable" v-model="selections">
+        <input type="checkbox" class="custom-control-input" :id="id" :valuess="variable" v-model="myVal">
         <label class="custom-control-label" :for="id"></label>
     </div>
 </template>
 
 <script>
+    import _ from 'lodash';
     import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
     import {tableFunctions} from "./bootstrapTableStore";
+    import BootTableEvent from './BootTableEvent';
 
     export default {
         name: "DataCheckbox",
@@ -15,16 +17,28 @@
             index: {type: Number, required: true},
             variable: {type: [String, Number], required: true},
             action: {
-                type: Function, default(s, d) {
+                type: Function, default() {
                 }
             },
             content: null
         },
         mixins: [BootstrapDataTableMixin],
         data() {
-            return {}
+            return {myVal: false}
         },
-        methods: {},
+        methods: {
+            setValue(p) {
+                let index = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable);
+                if (p === null || p === undefined) p = index > -1;
+                if (null === p || false === p) {
+                    tableFunctions.rowSelections[this.tableRef].splice(index, 1);
+                } else if (null === p || true === p) {
+                    if (index === -1) tableFunctions.rowSelections[this.tableRef].push(this.variable);
+                }
+                this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
+                console.log(tableFunctions.rowSelections[this.tableRef]);
+            }
+        },
         computed: {
             rows() {
                 return tableFunctions.rowSelections[this.tableRef];
@@ -36,23 +50,25 @@
                 get() {
                     return tableFunctions.rowSelections[this.tableRef];
                 }, set(v) {
-                    let index = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable);
-                    if (index > -1) {
-                        tableFunctions.rowSelections[this.tableRef].splice(index, 1);
-                    } else {
-                        tableFunctions.rowSelections[this.tableRef].push(this.variable);
-                    }
-                    console.log(tableFunctions.rowSelections[this.tableRef]);
+                    console.log(v);
+                    this.setValue();
                 }
             }
         },
         mounted() {
+            BootTableEvent.$on(this.tableRef + 'data-check', (e) => {
+                this.setValue(e);
+            });
         },
         watch: {
             rows: {
                 handler(v) {
                     console.log(v);
                 }, deep: true
+            },
+            myVal(v) {
+                // console.log(v);
+                this.setValue(v);
             }
         }
     }

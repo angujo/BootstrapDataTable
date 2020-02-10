@@ -9,6 +9,7 @@
     import {tableFunctions} from "./bootstrapTableStore";
     import HeadCheckbox from "./HeadCheckbox";
     import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import _ from 'lodash';
 
     export default {
         name: "ThColumnData",

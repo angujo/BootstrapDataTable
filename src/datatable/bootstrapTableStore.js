@@ -1,4 +1,4 @@
-
+import _ from 'lodash';
 
 export const tableFunctions = {
     instances: 0,
@@ -114,7 +114,7 @@ export const tableFunctions = {
             return AddUnsigned(RotateLeft(a, s), b);
 
 
-        };
+        }
 
 
         function HH(a, b, c, d, x, s, ac) {
@@ -126,7 +126,7 @@ export const tableFunctions = {
             return AddUnsigned(RotateLeft(a, s), b);
 
 
-        };
+        }
 
 
         function II(a, b, c, d, x, s, ac) {
@@ -138,7 +138,7 @@ export const tableFunctions = {
             return AddUnsigned(RotateLeft(a, s), b);
 
 
-        };
+        }
 
 
         function ConvertToWordArray(string) {
@@ -204,7 +204,7 @@ export const tableFunctions = {
             return lWordArray;
 
 
-        };
+        }
 
 
         function WordToHex(lValue) {
@@ -252,7 +252,7 @@ export const tableFunctions = {
                 }
             }
             return utftext;
-        };
+        }
 
 
         var x = Array();
