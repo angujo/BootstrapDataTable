@@ -7,7 +7,7 @@
                 <table-body :page-variable="checkboxVariable" :start-index="startIndex" :table-ref="tableReference" :columns="cleanColumns" :data="filteredData"/>
             </table>
         </div>
-        <pagination :total="totalData" :per-page="perPage" :page="activePage" @paged="newPage"/>
+        <pagination :table-ref="tableReference" :total="totalData" :per-page="perPage" :page="activePage" @paged="newPage"/>
         <div class="d-flex justify-content-center align-items-center overlay" v-if="loading">
             <i class="fa fa-cog fa-spin"/>
         </div>

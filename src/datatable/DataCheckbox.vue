@@ -36,7 +36,7 @@
                     if (index === -1) tableFunctions.rowSelections[this.tableRef].push(this.variable);
                 }
                 this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
-                console.log(tableFunctions.rowSelections[this.tableRef]);
+                //  console.log(tableFunctions.rowSelections[this.tableRef]);
             }
         },
         computed: {
@@ -59,6 +59,7 @@
             BootTableEvent.$on(this.tableRef + 'data-check', (e) => {
                 this.setValue(e);
             });
+            if (_.has(tableFunctions.rowSelections, this.tableRef)) this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
         },
         watch: {
             rows: {

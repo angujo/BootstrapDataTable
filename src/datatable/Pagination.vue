@@ -19,10 +19,12 @@
 <script>
     import {tableFunctions} from './bootstrapTableStore';
     import PaginationButton from "./PaginationButton";
+    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
 
     export default {
         name: "Pagination",
         components: {PaginationButton},
+        mixins:[BootstrapDataTableMixin],
         props: {
             url: {type: String, default: "http://google.com"},
             total: {type: [Number, String], default: 0},
@@ -57,6 +59,7 @@
         methods: {
             newPage(pg) {
                 this.$emit('paged', pg,(parseInt(pg) - 1) * this.pg_config.pageSize);
+                //BootTableEvent.$emit(this.tableRef + 'data-confirm');
             },
             keyed(pg) {
                 return tableFunctions.md5(pg.txt + pg.page);
