@@ -1,7 +1,8 @@
 <template>
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" :id="id" :valuess="variable" v-model="myVal">
-        <label class="custom-control-label" :for="id"></label>
+    <div>
+        <span @click="myVal=!myVal">
+            <i :class="['fa text-success',myVal? 'fa-check-square':'fa-square-o']"/>
+        </span>
     </div>
 </template>
 
@@ -36,6 +37,7 @@
                     if (index === -1) tableFunctions.rowSelections[this.tableRef].push(this.variable);
                 }
                 this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
+                BootTableEvent.$emit(this.tableRef + '-row-' + this.index, this.myVal);
                 //  console.log(tableFunctions.rowSelections[this.tableRef]);
             }
         },
@@ -76,5 +78,7 @@
 </script>
 
 <style scoped>
-
+    .fa {
+        font-size: 1.5rem;
+    }
 </style>

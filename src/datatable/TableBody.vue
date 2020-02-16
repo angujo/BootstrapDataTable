@@ -1,7 +1,7 @@
 <template>
     <tbody>
     <template v-if="data.length>0">
-        <table-row :table-ref="tableRef" v-for="(dt,i) in cleanData" :data="dt" :key="i"/>
+        <table-row :table-ref="tableRef" v-for="(dt,i) in cleanData" :data="dt.columns" :index="dt.index" :key="i"/>
     </template>
     <tr v-else>
         <td :colspan="columnsLength" class="bg-light">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import _ from 'lodash';
     import TableRow from "./TableRow";
     import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
     import {tableFunctions} from "./bootstrapTableStore";
@@ -107,7 +108,7 @@
                         }
                         nRow.push(nColumn);
                     }
-                    ndata.push(nRow);
+                    ndata.push({index: index, columns: nRow});
                 }
                 return ndata;
             }
