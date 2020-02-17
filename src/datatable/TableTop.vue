@@ -14,7 +14,7 @@
                     <span class="mr-2">Search</span>
                     <div class="search-area d-flex justify-content-start align-items-center flex-nowrap">
                         <input type="search" class="form-control-sm form-control form-inline d-inline border-0 rounded-0 search-control" v-model="s._q">
-                        <button type="button" class="btn btn-sm" @click="$emit('searched',s)"><i class="fa fa-search"/></button>
+                        <button type="button" class="btn btn-sm" @click="$emit('searched',s)"><i class="bdticon bdticon-search"/></button>
                     </div>
                 </label>
             </div>
@@ -33,6 +33,10 @@
 </script>
 
 <style scoped>
+    .bdticon-search {
+        font-size: 1.2rem;
+    }
+
     .search-area {
         border: 1px solid #CCCCCC;
     }

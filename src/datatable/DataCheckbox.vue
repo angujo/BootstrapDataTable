@@ -1,6 +1,6 @@
 <template>
     <div class="text-center" @click="checkedBox">
-        <i :class="['fa',myVal? 'fa-check-square text-success':'fa-square-o text-muted']"/>
+        <i :class="['bdticon',myVal? 'bdticon-check-circle text-success':'bdticon-circle text-muted']"/>
     </div>
 </template>
 
@@ -83,7 +83,4 @@
 </script>
 
 <style scoped>
-    .fa {
-        font-size: 1.5rem;
-    }
 </style>

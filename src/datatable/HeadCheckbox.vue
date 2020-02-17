@@ -1,6 +1,6 @@
 <template>
-    <span @click="changedStatus">
-        <i :class="['fa fa-2x',selectALl? 'fa-check-square text-success':(partial?'fa-minus-square text-info':'text-muted fa-square-o')]"/>
+    <span @click="changedStatus" class="">
+        <i :class="['bdticon',selectALl? 'bdticon-check-circle text-success':(partial?'bdticon-circle-half text-info':'text-muted bdticon-circle')]"/>
     </span>
 </template>
 
@@ -54,7 +54,4 @@
 </script>
 
 <style scoped>
-    .fa {
-        font-size: 1.5rem;
-    }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <tbody>
     <template v-if="data.length>0">
-        <table-row :table-ref="tableRef" v-for="(dt,i) in cleanData" :data="dt.columns" :index="dt.index" :key="i"/>
+        <table-row :table-ref="tableRef" v-for="(dt) in cleanData" :data="dt.columns" :index="dt.index" :key="dt.index"/>
     </template>
     <tr v-else>
         <td :colspan="columnsLength" class="bg-light">
@@ -52,7 +52,8 @@
                         nColumn = {content: null, column: Object.assign({}, this.columns[c]), name: clm.name, index: index};
                         delete nColumn.column.name;
                         if (_.isString(clm.name)) {
-                            if (Object.keys(tableFunctions.specialColumns()).includes(clm.name)) {
+                            var names = _.uniq(clm.name.match(/{\w+}/gi));
+                            if (names.length>0) {
                                 switch (clm.name) {
                                     case tableFunctions.columnCheckbox:
                                         nColumn.name = DataCheckbox;
@@ -73,35 +74,22 @@
                                     case tableFunctions.columnID:
                                         nColumn.content = index;
                                         break;
-                                    case tableFunctions.columnEDel:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-primary", bIcon: "<i class='fa fa-edit'/>", name: 'edit'},
-                                            {rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-danger", bIcon: "<i class='fa fa-trash'/>", name: 'delete'}];
-                                        break;
-                                    case tableFunctions.columnViEdit:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-primary", bIcon: "<i class='fa fa-edit'/>", name: 'edit'},
-                                            {rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-info", bIcon: "<i class='fa fa-eye'/>", name: 'view'}];
-                                        break;
-                                    case tableFunctions.columnEdit:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-primary", bIcon: "<i class='fa fa-edit'/>", name: 'edit'}];
-                                        break;
-                                    case tableFunctions.columnDelete:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-danger", bIcon: "<i class='fa fa-trash'/>", name: 'edit'}];
-                                        break;
-                                    case tableFunctions.columnView:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-info", bIcon: "<i class='fa fa-eye'/>", name: 'view'}];
-                                        break;
-                                    case tableFunctions.columnViEDel:
-                                        nColumn.name = TableButton;
-                                        nColumn.props = [{rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-info", bIcon: "<i class='fa fa-eye'/>", name: 'view'},
-                                            {rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-primary", bIcon: "<i class='fa fa-edit'/>", name: 'edit'},
-                                            {rowData: rData, bClick: clm.action, bClass: "btn btn-sm text-danger", bIcon: "<i class='fa fa-trash'/>", name: 'delete'}
-                                        ];
-                                        break;
+                                    default:
+                                        nColumn.props = [];
+                                        for (let i = 0; i < names.length; i++) {
+                                            switch (names[i]) {
+                                                case tableFunctions.columnView:
+                                                    nColumn.props.push({rowData: rData, bClick: clm.action, bClass: "btn text-info", bIcon: "<i class='bdticon bdticon-eye-fill'/>", name: 'view'});
+                                                    break;
+                                                case tableFunctions.columnEdit:
+                                                    nColumn.props.push({rowData: rData, bClick: clm.action, bClass: "btn text-primary", bIcon: "<i class='bdticon bdticon-pencil'/>", name: 'edit'});
+                                                    break;
+                                                case tableFunctions.columnDelete:
+                                                    nColumn.props.push({rowData: rData, bClick: clm.action, bClass: "btn text-danger", bIcon: "<i class='bdticon bdticon-trash'/>", name: 'delete'});
+                                                    break;
+                                            }
+                                        }
+                                        if (nColumn.props.length > 0) nColumn.name = TableButton;
                                 }
                             } else {
                                 nColumn.content = _.get(rData, clm.name, null);

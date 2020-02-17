@@ -9,7 +9,7 @@
         </div>
         <pagination :table-ref="tableReference" :total="totalData" :per-page="perPage" :page="activePage" @paged="newPage"/>
         <div class="d-flex justify-content-center align-items-center overlay" v-if="loading">
-            <i class="fa fa-cog fa-spin"/>
+            <i class="bdticon bdticon-gear bdticon-spin"/>
         </div>
     </div>
 </template>
@@ -41,7 +41,7 @@
             apiUrl: {type: String, default: null},
             pageSizes: {
                 type: Array, default() {
-                    return [10, 30, 50, 100];
+                    return [5,10, 30, 50, 100];
                 }
             }
         },
@@ -148,6 +148,7 @@
             this.loading = true;
         },
         mounted() {
+            this.perPage=this.pageSizes[0];
             _.set(tableFunctions.rowSelections, this.tableReference, []);
             _.set(tableFunctions.selectAll, this.tableReference, false);
             this.serverData = null !== this.apiUrl;
@@ -174,6 +175,12 @@
 </script>
 
 <style scoped>
+    @import "assets/style.css";
+
+    .bdticon-gear{
+        font-size: 3rem;
+    }
+
     .bootstrap-data-table {
         position: relative;
         min-height: 15rem;

@@ -46,12 +46,12 @@
                     return {txt: p, page: p, isActive: this.current === p}
                 });
                 if (pg_config.endPage < pg_config.totalPages) {
-                    pgs.push({txt: '<i class="fa fa-chevron-right"/>', page: pg_config.endPage + 1, isActive: false});
-                    if ((pg_config.endPage + 2) < pg_config.totalPages) pgs.push({txt: '<i class="fa fa-angle-double-left"/>', page: pg_config.totalPages, isActive: false});
+                    pgs.push({txt: '<i class="bdticon bdticon-chevron-right"/>', page: pg_config.endPage + 1, isActive: false});
+                    if ((pg_config.endPage + 2) < pg_config.totalPages) pgs.push({txt: '<i class="bdticon bdticon-skip-end"/>', page: pg_config.totalPages, isActive: false});
                 }
                 if (pg_config.startPage > 1) {
-                    pgs.unshift({txt: '<i class="fa fa-chevron-left"/>', page: pg_config.startPage - 1, isActive: false});
-                    if ((pg_config.startPage - 2) > 1) pgs.unshift({txt: '<i class="fa fa-angle-double-left"/>', page: 1, isActive: false});
+                    pgs.unshift({txt: '<i class="bdticon bdticon-chevron-left"/>', page: pg_config.startPage - 1, isActive: false});
+                    if ((pg_config.startPage - 2) > 1) pgs.unshift({txt: '<i class="bdticon bdticon-skip-start"/>', page: 1, isActive: false});
                 }
                 return pgs;
             }
@@ -150,5 +150,4 @@
 </script>
 
 <style scoped>
-
 </style>

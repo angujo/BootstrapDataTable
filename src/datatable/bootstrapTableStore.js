@@ -7,9 +7,6 @@ export const tableFunctions = {
     columnView: "{view}",
     columnEdit: "{edit}",
     columnDelete: "{delete}",
-    columnEDel: "{edit}{delete}",
-    columnViEDel: "{view}{edit}{delete}",
-    columnViEdit: "{view}{edit}",
     rowSelections: {},
     checkBoxVariables: {},
     checkBoxValues: {},
@@ -21,9 +18,6 @@ export const tableFunctions = {
         d[this.columnEdit] = "Edit";
         d[this.columnDelete] = "Delete";
         d[this.columnView] = "View";
-        d[this.columnEDel] = "Actions";
-        d[this.columnViEDel] = "Actions";
-        d[this.columnViEdit] = "Actions";
         return d;
     },
     specialColumnName(n) {
