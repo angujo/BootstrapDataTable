@@ -22,7 +22,6 @@
         },
         mounted() {
             BootTableEvent.$on(this.tableRef + '-row-' + this.index, (s) => {
-                console.log('Row event-'+this.index);
                 this.rowColor = s ? 'table-info' : null;
             });
         }

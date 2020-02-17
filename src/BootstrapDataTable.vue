@@ -22,6 +22,7 @@
     import TableTop from "./datatable/TableTop";
     import {tableFunctions} from "./datatable/bootstrapTableStore";
     import axios from 'axios';
+    import BootTableEvent from "./datatable/BootTableEvent";
 
     export default {
         name: "DataTable",
@@ -52,6 +53,14 @@
             }
         },
         methods: {
+            reload() {
+                this.loadData();
+            },
+            refresh() {
+                this.tempPage = 1;
+                this.searchParams = {};
+                this.loadData();
+            },
             realSearch(q) {
                 this.searchParams = Object.assign({}, this.searchParams, q);
                 this.loadData();
@@ -99,7 +108,7 @@
                     return;
                 }
                 if (!_.isObject(resp)) return;
-                this.totalData = _.get(resp, 'total', 0);
+                this.totalData = _.get(resp, 'total', resp.length);
                 this.rawData = _.get(resp, 'data', []);
             },
             prepareUrl(url) {
@@ -140,6 +149,7 @@
         },
         mounted() {
             _.set(tableFunctions.rowSelections, this.tableReference, []);
+            _.set(tableFunctions.selectAll, this.tableReference, false);
             this.serverData = null !== this.apiUrl;
             if (!this.serverData) {
                 this.rawData = this.data;
@@ -149,6 +159,9 @@
                 this.rawData = [];
                 this.loadData();
             }
+            BootTableEvent.$on(this.tableReference + 'select-event', (s) => {
+                this.$emit('allSelected', s);
+            })
         },
         watch: {
             searchParams() {

@@ -13,6 +13,7 @@ export const tableFunctions = {
     rowSelections: {},
     checkBoxVariables: {},
     checkBoxValues: {},
+    selectAll: {},
     specialColumns() {
         let d = {};
         d[this.columnCheckbox] = "";

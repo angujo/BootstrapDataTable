@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <bootstrap-data-table :general-search="true" v-bind="table"/>
+        <bootstrap-data-table @allSelected="allSelected" :general-search="true" v-bind="table"/>
     </div>
 </template>
 
@@ -14,7 +14,11 @@
         data() {
             return {
                 table: {
-                    columns: [{name: '{checkbox}'}, {name: '{id}'}, {name: 'id', title: 'PIN'}, {name: 'first_name', search: true}, {name: 'last_name', search: true},
+                    columns: [{
+                        name: '{checkbox}', action() {
+                            // console.log(s, d);
+                        }
+                    }, {name: '{id}'}, {name: 'id', title: 'PIN'}, {name: 'first_name', search: true}, {name: 'last_name', search: true},
                         {name: 'email', search: 'email'}, {name: 'gender', search: ['male', 'female']}, {name: 'ip_address'}, {name: TestColumn},
                         {
                             name: "{view}{edit}{delete}", title: "", action(e, d) {
@@ -376,6 +380,10 @@
                     ]
                 }
             };
+        }, methods: {
+            allSelected(v) {
+                console.log(v ? 'All selected' : 'None Selected');
+            }
         }
     }
 </script>

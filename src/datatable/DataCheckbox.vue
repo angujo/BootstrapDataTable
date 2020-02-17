@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <span @click="myVal=!myVal">
-            <i :class="['fa text-success',myVal? 'fa-check-square':'fa-square-o']"/>
-        </span>
+    <div class="text-center" @click="checkedBox">
+        <i :class="['fa',myVal? 'fa-check-square text-success':'fa-square-o text-muted']"/>
     </div>
 </template>
 
@@ -11,6 +9,7 @@
     import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
     import {tableFunctions} from "./bootstrapTableStore";
     import BootTableEvent from './BootTableEvent';
+    import ColumnDataMixin from "./ColumnDataMixin";
 
     export default {
         name: "DataCheckbox",
@@ -23,11 +22,15 @@
             },
             content: null
         },
-        mixins: [BootstrapDataTableMixin],
+        mixins: [BootstrapDataTableMixin, ColumnDataMixin],
         data() {
             return {myVal: false}
         },
         methods: {
+            checkedBox() {
+                this.myVal = !this.myVal;
+                this.action(this.myVal, this.rowData);
+            },
             setValue(p) {
                 let index = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable);
                 if (p === null || p === undefined) p = index > -1;
@@ -38,6 +41,7 @@
                 }
                 this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
                 BootTableEvent.$emit(this.tableRef + '-row-' + this.index, this.myVal);
+                BootTableEvent.$emit(this.tableRef + 'head-check');
                 //  console.log(tableFunctions.rowSelections[this.tableRef]);
             }
         },
@@ -58,10 +62,11 @@
             }
         },
         mounted() {
-            BootTableEvent.$on(this.tableRef + 'data-check', (e) => {
-                this.setValue(e);
+            BootTableEvent.$on(this.tableRef + 'data-check', () => {
+                this.setValue(tableFunctions.selectAll[this.tableRef]);
             });
-            if (_.has(tableFunctions.rowSelections, this.tableRef)) this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
+            if (_.has(tableFunctions.rowSelections, this.tableRef) && false === tableFunctions.selectAll[this.tableRef]) this.myVal = tableFunctions.rowSelections[this.tableRef].indexOf(this.variable) > -1;
+            else if (true === tableFunctions.selectAll[this.tableRef]) this.myVal = true;
         },
         watch: {
             rows: {
@@ -70,7 +75,7 @@
                 }, deep: true
             },
             myVal(v) {
-                // console.log(v);
+                if (false === v && true === tableFunctions.selectAll[this.tableRef]) tableFunctions.selectAll[this.tableRef] = false;
                 this.setValue(v);
             }
         }

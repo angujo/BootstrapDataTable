@@ -66,6 +66,9 @@
                                         } else {
                                             nColumn.props.variable = index;
                                         }
+                                        if (_.has(clm, 'action') && _.isFunction(clm.action)) {
+                                            nColumn.props.action = clm.action;
+                                        }
                                         break;
                                     case tableFunctions.columnID:
                                         nColumn.content = index;
