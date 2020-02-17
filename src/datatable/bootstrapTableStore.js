@@ -7,6 +7,7 @@ export const tableFunctions = {
     columnView: "{view}",
     columnEdit: "{edit}",
     columnDelete: "{delete}",
+    columnButton: "{custom_button}",
     rowSelections: {},
     checkBoxVariables: {},
     checkBoxValues: {},

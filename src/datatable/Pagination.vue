@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-auto">
-            <div class="dataTables_paginate paging_simple_numbers">
+            <div class="dataTables_paginate paging_simple_numbers" v-if="pages.length>1">
                 <ul class="pagination pagination-sm">
                     <pagination-button class="paginate_button page-item" @paged="newPage" v-for="pg in pages" v-bind="pg" :key="keyed(pg)"/>
                 </ul>

@@ -53,7 +53,7 @@
                         delete nColumn.column.name;
                         if (_.isString(clm.name)) {
                             var names = _.uniq(clm.name.match(/{\w+}/gi));
-                            if (names.length>0) {
+                            if (names.length > 0) {
                                 switch (clm.name) {
                                     case tableFunctions.columnCheckbox:
                                         nColumn.name = DataCheckbox;
@@ -61,8 +61,8 @@
                                         nColumn.props = {};
                                         nColumn.props.rowData = rData;
                                         nColumn.props.index = index;
-                                        if (_.has(clm, 'variable') && _.isString(clm.variable) &&
-                                            (_.get(rData, clm.variable, null).isString() || _.get(rData, clm.variable, null).isNumber())) {
+                                        if (_.has(clm, 'variable') && _.isString(clm.variable) && _.has(rData, clm.variable) &&
+                                            (_.isString(rData[clm.variable]) || _.isNumber(rData[clm.variable]))) {
                                             nColumn.props.variable = _.get(rData, clm.variable, null);
                                         } else {
                                             nColumn.props.variable = index;
@@ -76,6 +76,8 @@
                                         break;
                                     default:
                                         nColumn.props = [];
+                                        var cc = 0, styles = _.has(clm, 'styles') && _.isArray(clm.styles) ? styles = clm.styles : (_.isPlainObject(clm.styles) ? [clm.styles] : []),
+                                            def_style = {class: "btn btn-secondary", html: "<i class='bdticon bdticon-option'/>"};
                                         for (let i = 0; i < names.length; i++) {
                                             switch (names[i]) {
                                                 case tableFunctions.columnView:
@@ -87,10 +89,17 @@
                                                 case tableFunctions.columnDelete:
                                                     nColumn.props.push({rowData: rData, bClick: clm.action, bClass: "btn text-danger", bIcon: "<i class='bdticon bdticon-trash'/>", name: 'delete'});
                                                     break;
+                                                case tableFunctions.columnButton:
+                                                    cc++;
+                                                    var style = Object.assign({}, _.get(styles, cc-1, def_style));
+                                                    nColumn.props.push({rowData: rData, bClick: clm.action, bClass: style.class, bIcon: style.html, name: 'custom_button' + cc});
+                                                    break;
                                             }
                                         }
                                         if (nColumn.props.length > 0) nColumn.name = TableButton;
                                 }
+                            } else if (_.has(clm, 'formatter') && _.isFunction(clm.formatter)) {
+                                nColumn.content = clm.formatter(_.get(rData, clm.name, null));
                             } else {
                                 nColumn.content = _.get(rData, clm.name, null);
                             }

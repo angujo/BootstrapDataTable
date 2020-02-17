@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-between align-items-center">
         <div class="col-sm-12 col-md-auto">
-            <label class="d-inline d-flex flex-nowrap align-items-center">
+            <label class="d-inline d-flex flex-nowrap align-items-center" v-if="enableSizes">
                 <span class="mr-2">Show</span>
                 <select class="form-control form-control-sm form-inline d-inline rounded-0" @input="$emit('countChanged',$event.target.value)">
                     <option v-for="s in pageSizes" :value="s" :key="s">{{s}}</option>
@@ -28,6 +28,11 @@
         props: {pageSizes: {type: Array, required: true}, generalSearch: {type: Boolean, default: true}},
         data() {
             return {s: {_q: null}}
+        },
+        computed: {
+            enableSizes() {
+                return this.pageSizes.length > 1;
+            }
         }
     }
 </script>

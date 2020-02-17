@@ -15,13 +15,23 @@
             return {
                 table: {
                     columns: [{
-                        name: '{checkbox}', action() {
+                        name: '{checkbox}', variable: 'id', action() {
                             // console.log(s, d);
                         }
-                    }, {name: '{id}'}, {name: 'id', title: 'PIN'}, {name: 'first_name', search: true}, {name: 'last_name', search: true},
-                        {name: 'email', search: 'email'}, {name: 'gender', search: ['male', 'female']}, {name: 'ip_address'}, {name: TestColumn},
+                    }, {name: '{id}', title: 'INDEX'}, {name: 'id'}, {name: 'first_name', search: true}, {name: 'last_name', search: true},
                         {
-                            name: "{view}{edit}{delete}", title: "", action(e, d) {
+                            name: 'email', search: 'email', formatter(dt) {
+                                return `<u class="text-success small">${dt}</u>`;
+                            }
+                        }, {name: 'gender', search: ['male', 'female']}, {name: TestColumn},
+                        {
+                            name: "{custom_button}", title: "Styled", styles: [{html: "<i class='bdticon bdticon-x-octagon-fill'/>", class: "btn"}],
+                            action(e, d) {
+                                alert('Am style: ' + e + ' for ID: ' + d.id)
+                            }
+                        },
+                        {
+                            name: "{view}{edit}{delete}{custom_button}", title: "Actions",  styles: [{html: "<i class='bdticon bdticon-wifi'/>", class: "btn"}],action(e, d) {
                                 alert('We are here: ' + e + ' for ID: ' + d.id)
                             }
                         }],
