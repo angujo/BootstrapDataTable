@@ -7,6 +7,7 @@
 <script>
     import BootstrapDataTable from "./BootstrapDataTable";
     import TestColumn from "./datatable/TestColumn";
+    import TestDetailRow from "./datatable/TestDetailRow";
 
     export default {
         name: 'App',
@@ -31,7 +32,7 @@
                             }
                         },
                         {
-                            name: "{view}{edit}{delete}{custom_button}", title: "Actions",  styles: [{html: "<i class='bdticon bdticon-wifi'/>", class: "btn"}],action(e, d) {
+                            name: "{detail_row}{view}{edit}{delete}{custom_button}",detailRow:TestDetailRow, title: "Actions",  styles: [{html: "<i class='bdticon bdticon-wifi'/>", class: "btn"}],action(e, d) {
                                 alert('We are here: ' + e + ' for ID: ' + d.id)
                             }
                         }],

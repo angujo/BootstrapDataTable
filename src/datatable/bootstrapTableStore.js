@@ -4,6 +4,7 @@ export const tableFunctions = {
     instances: 0,
     columnCheckbox: "{checkbox}",
     columnID: "{id}",
+    columnDetailRow: "{detail_row}",
     columnView: "{view}",
     columnEdit: "{edit}",
     columnDelete: "{delete}",
