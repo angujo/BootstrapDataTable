@@ -17,9 +17,9 @@
 </template>
 
 <script>
-    import {tableFunctions} from './bootstrapTableStore';
+    import {tableFunctions} from '../../utils/bootstrapTableStore';
     import PaginationButton from "./PaginationButton";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
 
     export default {
         name: "Pagination",

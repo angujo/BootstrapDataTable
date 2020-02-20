@@ -13,7 +13,7 @@
 
 <script>
     import _ from 'lodash';
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
 
     export default {
         name: "TrColumnData",

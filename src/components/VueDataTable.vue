@@ -20,9 +20,9 @@
     import TableBody from "./datatable/TableBody";
     import TableHead from "./datatable/TableHead";
     import TableTop from "./datatable/TableTop";
-    import {tableFunctions} from "./datatable/bootstrapTableStore";
+    import {tableFunctions} from "../utils/bootstrapTableStore";
     import axios from 'axios';
-    import BootTableEvent from "./datatable/BootTableEvent";
+    import BootTableEvent from "../utils/BootTableEvent";
 
     export default {
         name: "DataTable",
@@ -97,8 +97,8 @@
                         this.assignServerData(resp.data);
                         this.loading = false;
                     }).catch(error => {
-                    console.error(error);
                     this.loading = false;
+                    throw error;
                 });
             },
             assignServerData(resp) {
@@ -175,7 +175,7 @@
 </script>
 
 <style scoped>
-    @import "assets/style.css";
+    @import "../assets/style.css";
 
     .bdticon-gear{
         font-size: 3rem;

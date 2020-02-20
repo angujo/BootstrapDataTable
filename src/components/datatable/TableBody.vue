@@ -16,8 +16,8 @@
 <script>
     import _ from 'lodash';
     import TableRow from "./TableRow";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
-    import {tableFunctions} from "./bootstrapTableStore";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
+    import {tableFunctions} from "../../utils/bootstrapTableStore";
 
     export default {
         name: "TableBody",

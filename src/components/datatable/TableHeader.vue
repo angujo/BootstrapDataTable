@@ -6,7 +6,7 @@
 
 <script>
     import ThColumnData from "./ThColumnData";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
 
     export default {
         name: "TableHeader",

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import ColumnDataMixin from "./ColumnDataMixin";
+    import ColumnDataMixin from "../../mixins/ColumnDataMixin";
 
     export default {
         name: "TestDetailRow",

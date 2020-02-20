@@ -6,9 +6,10 @@
 </template>
 
 <script>
+  import _ from 'lodash';
     import TableHeader from "./TableHeader";
     import ColumnSearch from "./ColumnSearch";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
 
     export default {
         name: "TableHead",

@@ -6,9 +6,9 @@
 
 <script>
     import _ from 'lodash';
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
-    import {tableFunctions} from "./bootstrapTableStore";
-    import BootTableEvent from './BootTableEvent';
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
+    import {tableFunctions} from "../../utils/bootstrapTableStore";
+    import BootTableEvent from '../../utils/BootTableEvent';
 
     export default {
         name: "HeadCheckbox",
@@ -41,7 +41,7 @@
                         })
                     }
                     BootTableEvent.$emit(this.tableRef + 'data-check', v);
-                    console.log(tableFunctions.rowSelections);
+                    //console.log(tableFunctions.rowSelections);
                 }
             }
         }, mounted() {

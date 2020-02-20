@@ -1,48 +1,40 @@
 {
-  "name": "bootstrap-data-table",
+  "name": "vue-data-table",
   "version": "0.1.0",
-  "private": false,
-  "main": "./dist/BootstrapDataTable.common.js",
+  "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name BootstrapDataTable src/index.js",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --report --target lib --name vue-data-table ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs"
   },
+  "main": "dist/vue-data-table.umd.min.js",
+  "files": [
+    "src",
+    "dist/*.{js,css}"
+  ],
   "dependencies": {
     "axios": "^0.19.2",
-    "bootstrap-icons": "^1.0.0-alpha2",
-    "core-js": "^3.6.4",
-    "fragment": "^0.3.0",
     "lodash": "^4.17.15",
     "vue": "^2.6.11",
     "vue-fragment": "^1.5.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
+    "@babel/core": "^7.7.7",
+    "@vue/babel-preset-app": "^4.1.1",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.1.2",
-    "vue-template-compiler": "^2.6.11"
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.0.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.2.0"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+  "peerDependencies": {
+    "moment": "^2.24.0"
+  }
 }

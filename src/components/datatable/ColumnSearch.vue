@@ -1,10 +1,10 @@
 <template>
     <tr>
-        <td v-for="column in columns">
+        <td v-for="(column,i) in columns" :key="'cs-'+i">
             <template v-if="null!==column.var">
                 <select v-if="column.options.length>0" class="form-control-sm form-control rounded-0 search-control" @input="emitSearch(column.var,$event.target.value)">
                     <option></option>
-                    <option v-for="opt in column.options" :value="opt">{{opt}}</option>
+                    <option v-for="opt in column.options" :value="opt" :key="opt">{{opt}}</option>
                 </select>
                 <input class="form-control form-control-sm search-control rounded-0" type="search" @input="emitSearch(column.var,$event.target.value)" v-else>
             </template>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import _ from 'lodash'
     export default {
         name: "ColumnSearch",
         props: {

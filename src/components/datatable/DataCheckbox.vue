@@ -6,10 +6,10 @@
 
 <script>
     import _ from 'lodash';
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
-    import {tableFunctions} from "./bootstrapTableStore";
-    import BootTableEvent from './BootTableEvent';
-    import ColumnDataMixin from "./ColumnDataMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
+    import {tableFunctions} from "../../utils/bootstrapTableStore";
+    import BootTableEvent from '../../utils/BootTableEvent';
+    import ColumnDataMixin from "../../mixins/ColumnDataMixin";
 
     export default {
         name: "DataCheckbox",
@@ -55,8 +55,8 @@
             selections: {
                 get() {
                     return tableFunctions.rowSelections[this.tableRef];
-                }, set(v) {
-                    console.log(v);
+                }, set() {
+                    //console.log(v);
                     this.setValue();
                 }
             }
@@ -69,11 +69,6 @@
             else if (true === tableFunctions.selectAll[this.tableRef]) this.myVal = true;
         },
         watch: {
-            rows: {
-                handler(v) {
-                    console.log(v);
-                }, deep: true
-            },
             myVal(v) {
                 if (false === v && true === tableFunctions.selectAll[this.tableRef]) tableFunctions.selectAll[this.tableRef] = false;
                 this.setValue(v);

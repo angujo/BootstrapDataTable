@@ -1,7 +1,3 @@
-import BootstrapDataTable from "./BootstrapDataTable";
-
-export default {
-    install(Vue) {
-        Vue.component('BootstrapDataTable', BootstrapDataTable);
-    }
-};
+// export * from './components'
+export * from './mixins'
+export * from './install'

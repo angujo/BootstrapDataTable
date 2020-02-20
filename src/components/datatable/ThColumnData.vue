@@ -6,9 +6,9 @@
 </template>
 
 <script>
-    import {tableFunctions} from "./bootstrapTableStore";
+    import {tableFunctions} from "../../utils/bootstrapTableStore";
     import HeadCheckbox from "./HeadCheckbox";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
     import _ from 'lodash';
 
     export default {

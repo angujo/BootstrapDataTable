@@ -17,9 +17,9 @@
     import _ from "lodash";
     import {Fragment} from 'vue-fragment';
     import TrColumnData from "./TrColumnData";
-    import BootstrapDataTableMixin from "./BootstrapDataTableMixin";
-    import BootTableEvent from "./BootTableEvent";
-    import {tableFunctions} from "./bootstrapTableStore";
+    import BootstrapDataTableMixin from "../../mixins/BootstrapDataTableMixin";
+    import BootTableEvent from "../../utils/BootTableEvent";
+    import {tableFunctions} from "../../utils/bootstrapTableStore";
     import DataCheckbox from "./DataCheckbox";
     import TableButton from "./TableButton";
 
